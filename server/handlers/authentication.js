@@ -10,8 +10,14 @@ exports.signin = async (req, res, next) => {
         let isMatch = await user.comparePassword(req.body.password);
         if (isMatch) {
             let token = jwt.sign({id, username, profileImageLink}, process.env.JWT_SECRET);
+            return res.status(200).json({ id, username, profileImageLink, token });
+        } else {
+            return next({
+                status: 400,
+                message: "invalid username or password"
+            });
         }
-        return res.status(200).json({ id, username, profileImageLink, token });
+        
     } catch (error) {
         return next({
             status: 400,

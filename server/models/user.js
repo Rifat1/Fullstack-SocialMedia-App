@@ -19,9 +19,9 @@ const userSchema = new mongoose.Schema({
     profileImageLink: {
         type: String,
     },
-    messages: [{
+    userPosts: [{
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'Message'
+        ref : 'userPost'
     }]
 });
 

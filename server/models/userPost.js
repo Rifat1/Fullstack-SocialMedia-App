@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const user = require('./user');
 
-const messagesSchema = new mongoose.Schema({
+const userPostSchema = new mongoose.Schema({
     text: {
         type : String,
         required : true
@@ -13,6 +13,6 @@ const messagesSchema = new mongoose.Schema({
     }
 });
 
-const Messages = mongoose.model('Messages', messagesSchema);
+const UserPost = mongoose.model('UserPost', messagesSchema);
 
-module.exports = Messages;
+module.exports = UserPost;
