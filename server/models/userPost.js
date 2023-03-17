@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
-const user = require('./user');
+const User = require('./user');
 
 const userPostSchema = new mongoose.Schema({
     text: {
         type : String,
-        required : true
+        required : true,
+        maxLength: 280
     },
     
     user: {
@@ -13,6 +14,14 @@ const userPostSchema = new mongoose.Schema({
     }
 });
 
-const UserPost = mongoose.model('UserPost', messagesSchema);
+userPostSchema.pre('remove', async function(next) {
+    try {
+        let user = await User.findById(this.user);
+    } catch (error) {
+        return next(error);
+    }
+});
+
+const UserPost = mongoose.model('UserPost', userPostSchema);
 
 module.exports = UserPost;

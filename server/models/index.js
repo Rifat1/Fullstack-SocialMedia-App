@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 mongoose.set('debug', true);
 mongoose.Promise = Promise;
-mongoose.connect("process.env.MONGODB_URI || 'mongodb://localhost:3000", { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, keepAlive: true });
+// console.log(process.env.MONGODB_URI);
+mongoose.connect("mongodb://127.0.0.1:27017/MyPost");
 
 
 module.exports.User = require('./user');
