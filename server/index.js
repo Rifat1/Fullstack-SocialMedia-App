@@ -6,6 +6,7 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const errorHandler = require('./middleware/errorHandler');
 const authRoutes = require('./routes/authentication');
+const postRoutes = require('./routes/userPosts');
 
 
 app.use(cors());
@@ -17,6 +18,7 @@ app.use('/', (req, res) => {
     res.send('Hello World!')
   })
 app.use('/api/auth', authRoutes);
+app.use('/api/users/:id/posts', postRoutes);
 
 
 app.use(function (req, res, next) {

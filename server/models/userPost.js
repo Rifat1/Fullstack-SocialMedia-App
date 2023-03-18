@@ -17,6 +17,9 @@ const userPostSchema = new mongoose.Schema({
 userPostSchema.pre('remove', async function(next) {
     try {
         let user = await User.findById(this.user);
+        user.userPosts.remove(this.id);
+        await user.save();
+        return next();
     } catch (error) {
         return next(error);
     }
