@@ -1,6 +1,6 @@
 const db = require("../models");
 
-// /api/users/:id/posts
+// POST /api/users/:id/posts
 exports.createPost = async (req, res, next) => {
     try {
         let userPost = await db.UserPost.create({
@@ -19,6 +19,23 @@ exports.createPost = async (req, res, next) => {
     }
 };
 
-exports.getPosts = async (req, res, next) => {};
+// GET /api/users/:id/posts/:post_id
+exports.getPost = async (req, res, next) => {
+    try {
+        let userPost = await db.UserPost.find(req.params.post_id);
+        return res.status(200).json(userPost);
+    } catch (error) {
+        return next(error);
+    }
+};
 
-exports.deletePost = async (req, res, next) => {};
+// DELETE /api/users/:id/posts/:post_id
+exports.deletePost = async (req, res, next) => {
+    try {
+        let userPost = await db.UserPost.findById(req.params.post_id);
+        await userPost.remove();
+        return res.status(200).json({ message: "Post deleted" });
+    } catch (error) {
+        return next(error);
+    }
+};
