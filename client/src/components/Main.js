@@ -12,6 +12,7 @@ const Main = () => {
         element={<AuthForm signup buttonText="sign me up!" />}
       />
       <Route path="/signin" element={<AuthForm buttonText="sign in" />} />
+      {/* <Route path="*" element={<NotFound/>} /> */}
     </Routes>
   );
 };
