@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
+import Alert from "react-bootstrap/Alert";
 import { authUser } from "../services/apiCall";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentUser } from "../features/currentUser/currentUserSlice";
+import { addError, removeError } from "../features/errors/errorsSlice";
 
-const AuthForm = ({ signup, buttonText }) => {
+const AuthForm = ({ signup, buttonText, history }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [profileImageLink, setProfileImageLink] = useState("");
 
+  const { errorMessage } = useSelector((store) => store.errors);
   const dispatch = useDispatch();
 
   const userData = signup
@@ -19,15 +22,24 @@ const AuthForm = ({ signup, buttonText }) => {
   // console.log(userData);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const authType = signup ? "signup" : "signin";
-    const user = await authUser(authType, userData);
-    dispatch(setCurrentUser(user));
-    console.log("you logged in successfully");
+    try {
+      e.preventDefault();
+      const authType = signup ? "signup" : "signin";
+      const user = await authUser(authType, userData);
+      dispatch(setCurrentUser(user));
+      dispatch(removeError());
+      history.push("/");
+    } catch (error) {
+      dispatch(addError(error.message));
+    }
   };
+
+  errorMessage && history.listen(() => dispatch(removeError()));
 
   return (
     <Form onSubmit={handleSubmit}>
+      {/* <h2>hello world</h2> */}
+      {errorMessage && <Alert variant="danger">{errorMessage}</Alert>}
       <Form.Group className="mb-3" controlId="formBasicEmail">
         <Form.Label>Email address</Form.Label>
         <Form.Control
@@ -35,9 +47,6 @@ const AuthForm = ({ signup, buttonText }) => {
           placeholder="Enter email"
           onChange={(e) => setEmail(e.target.value)}
         />
-        {/* <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text> */}
       </Form.Group>
 
       <Form.Group className="mb-3" controlId="formBasicPassword">

@@ -28,10 +28,12 @@ app.use(
   ensureCorrectUser,
   postRoutes
 );
+
+// get all posts
 app.use("/api/posts", ensureAuthenticated, async (req, res, next) => {
   let userPosts = await db.UserPost.find()
     .sort({ createdAt: "descending" })
-    .populate("user", { username: true, profileImageLink: true }); 
+    .populate("user", { username: true, profileImageLink: true });
 });
 
 app.use(function (req, res, next) {
