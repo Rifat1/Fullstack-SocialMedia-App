@@ -2,7 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const app = express();
 const db = require("./models");
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const errorHandler = require("./middleware/errorHandler");
@@ -18,9 +18,9 @@ app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: true }));
 
 //will put routes here
-app.use("/", (req, res) => {
-  res.send("Hello World!");
-});
+// app.use("/", (req, res) => {
+//   res.send("Hello World!");
+// });
 app.use("/api/auth", authRoutes);
 app.use(
   "/api/users/:id/posts",
