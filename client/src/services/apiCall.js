@@ -13,6 +13,11 @@ export const getPosts = async () => {
   return res.data;
 };
 
+export const postNewPost = async (id, newPostData) => {
+  const res = await axios.post(`/api/users/${id}/posts`, newPostData);
+  return res.data;
+};
+
 // type will be string "signup" or "signin"
 //userData is an object with the following properties
 export const authUser = async (type, userData) => {

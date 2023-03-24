@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { getPosts } from "../services/apiCall";
 import { loadPosts } from "../features/posts/postsSlice";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import PostItem from "./PostItem";
 
 const PostsList = () => {
   const { posts } = useSelector((store) => store.posts);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     const fetchPosts = async () => {
       const postsArray = await getPosts();
-      loadPosts(postsArray);
+      dispatch(loadPosts(postsArray));
     };
     fetchPosts();
   }, [posts]);

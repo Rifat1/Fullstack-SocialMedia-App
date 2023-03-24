@@ -63,3 +63,14 @@ form {
   justify-content: center;
 } */
 
+.text-area{
+  color: white;
+}
+/* .text-muted{
+  color: white;
+} */
+
+.text-muted {
+  --bs-text-opacity: 1;
+  color: var(--bs-body-bg)!important;
+}
