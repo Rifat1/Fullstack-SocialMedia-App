@@ -24,15 +24,16 @@ const AuthForm = ({ signup, buttonText, history }) => {
   // console.log(userData);
 
   const handleSubmit = async (e) => {
-    try {
-      e.preventDefault();
-      const authType = signup ? "signup" : "signin";
-      const user = await authUser(authType, userData);
-      dispatch(setCurrentUser(user));
+    e.preventDefault();
+    const authType = signup ? "signup" : "signin";
+    const res = await authUser(authType, userData);
+    if (res.name !== "AxiosError") {
+      dispatch(setCurrentUser(res));
       dispatch(removeError());
-      // history.push("/");
-    } catch (error) {
-      dispatch(addError(error.message));
+      console.log(res);
+    } else {
+      console.log(res);
+      dispatch(addError(res.response.data.error.message));
     }
   };
 

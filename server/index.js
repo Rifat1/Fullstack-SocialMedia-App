@@ -34,6 +34,7 @@ app.use("/api/posts", ensureAuthenticated, async (req, res, next) => {
   let userPosts = await db.UserPost.find()
     .sort({ createdAt: "descending" })
     .populate("user", { username: true, profileImageLink: true });
+  return res.status(200).json(userPosts);
 });
 
 app.use(function (req, res, next) {

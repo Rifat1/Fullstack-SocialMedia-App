@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { setCurrentUser } from "../features/currentUser/currentUserSlice";
+import { removeError } from "../features/errors/errorsSlice";
 import { setTokenHeader } from "../services/apiCall";
 
 const NavbarComponent = () => {
@@ -34,10 +35,18 @@ const NavbarComponent = () => {
             </Nav>
           ) : (
             <Nav>
-              <Nav.Link as={Link} to="/signup">
+              <Nav.Link
+                as={Link}
+                to="/signup"
+                onClick={() => dispatch(removeError())}
+              >
                 Sign up
               </Nav.Link>
-              <Nav.Link as={Link} to="/signin">
+              <Nav.Link
+                as={Link}
+                to="/signin"
+                onClick={() => dispatch(removeError())}
+              >
                 Sign in
               </Nav.Link>
             </Nav>
