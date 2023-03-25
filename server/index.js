@@ -1,4 +1,5 @@
 require("dotenv").config();
+const path = require("path");
 const express = require("express");
 const app = express();
 const db = require("./models");
@@ -17,10 +18,13 @@ app.use(cors());
 app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: true }));
 
-//will put routes here
-// app.use("/", (req, res) => {
-//   res.send("Hello World!");
-// });
+// code block for serving the front end for cyclic.sh deployment
+app.use(express.static(path.join(__dirname, "../client/build")));
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
+
+//All my put routes here
 app.use("/api/auth", authRoutes);
 app.use(
   "/api/users/:id/posts",
