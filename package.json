@@ -1,4 +1,4 @@
 {
-    "main": "src/index.js"
+    "main": "server/index.js"
     
   }
