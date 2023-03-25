@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
+import { Container } from "react-bootstrap";
 import { getPosts } from "../services/apiCall";
-import { loadPosts } from "../features/posts/postsSlice";
+import { loadPosts, removePost } from "../features/posts/postsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import PostItem from "./PostItem";
 
@@ -14,7 +15,7 @@ const PostsList = () => {
       dispatch(loadPosts(postsArray));
     };
     fetchPosts();
-  }, [posts]);
+  }, [dispatch]);
 
   let postsList = posts.map((post) => (
     <PostItem
@@ -25,7 +26,11 @@ const PostsList = () => {
       profileimageLink={post.user.profileimageLink}
     />
   ));
-  return <div>{postsList}</div>;
+  return (
+    <div>
+      <Container>{postsList}</Container>
+    </div>
+  );
 };
 
 export default PostsList;
