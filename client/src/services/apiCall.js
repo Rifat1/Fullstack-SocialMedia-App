@@ -18,6 +18,10 @@ export const postNewPost = async (id, newPostData) => {
   return res.data;
 };
 
+export const removePostApi = async (id, postID) => {
+  await axios.delete(`/api/users/${id}/posts/${postID}`);
+};
+
 // type will be string "signup" or "signin"
 //userData is an object with the following properties
 export const authUser = async (type, userData) => {

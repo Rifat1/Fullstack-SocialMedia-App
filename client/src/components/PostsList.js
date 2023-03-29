@@ -19,7 +19,8 @@ const PostsList = () => {
 
   let postsList = posts.map((post) => (
     <PostItem
-      key={post._id}
+      postID={post._id}
+      userID={post.user._id}
       date={post.createdAt}
       text={post.text}
       username={post.user.username}

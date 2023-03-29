@@ -34,7 +34,7 @@ exports.getPost = async (req, res, next) => {
 exports.deletePost = async (req, res, next) => {
   try {
     let userPost = await db.UserPost.findById(req.params.post_id);
-    await userPost.remove();
+    await userPost.deleteOne();
     return res.status(200).json({ message: "Post deleted" });
   } catch (error) {
     return next(error);

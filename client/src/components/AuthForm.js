@@ -30,7 +30,7 @@ const AuthForm = ({ signup, buttonText, history }) => {
     if (res.name !== "AxiosError") {
       dispatch(setCurrentUser(res));
       dispatch(removeError());
-      console.log(res);
+      // console.log(res);
     } else {
       console.log(res);
       dispatch(addError(res.response.data.error.message));
