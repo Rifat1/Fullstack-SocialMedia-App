@@ -13,6 +13,7 @@ const PostItem = ({
   text,
   username,
   profileImageLink,
+  isCorrectUser,
 }) => {
   const dispatch = useDispatch();
   const handleClick = async (e) => {
@@ -37,9 +38,11 @@ const PostItem = ({
         </span>
         <p>{text}</p>
       </div>
-      <Button variant="success" type="submit" onClick={handleClick}>
-        delete post
-      </Button>
+      {isCorrectUser && (
+        <Button variant="success" type="submit" onClick={handleClick}>
+          delete post
+        </Button>
+      )}
     </div>
   );
 };

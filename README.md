@@ -6,6 +6,7 @@ https://user-images.githubusercontent.com/50491150/227734173-3a23ecf3-e164-4ba2-
 <ul>
 <li>Signup</li>
 <li>Signin</li>
+<li>Get posts</li>
 <li>Create post</li>
 <li>Delete post</li>
 </ul>

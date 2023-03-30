@@ -7,6 +7,7 @@ import PostItem from "./PostItem";
 
 const PostsList = () => {
   const { posts } = useSelector((store) => store.posts);
+  const { user } = useSelector((store) => store.currentUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,12 +20,14 @@ const PostsList = () => {
 
   let postsList = posts.map((post) => (
     <PostItem
+      key={post._id}
       postID={post._id}
       userID={post.user._id}
       date={post.createdAt}
       text={post.text}
       username={post.user.username}
       profileimageLink={post.user.profileimageLink}
+      isCorrectUser={user.id === post.user._id}
     />
   ));
   return (
