@@ -26,7 +26,7 @@ const PostsList = () => {
       date={post.createdAt}
       text={post.text}
       username={post.user.username}
-      profileimageLink={post.user.profileimageLink}
+      profileImageLink={post.user.profileImageLink}
       isCorrectUser={user.id === post.user._id}
     />
   ));
